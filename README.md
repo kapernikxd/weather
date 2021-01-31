@@ -1,5 +1,6 @@
 # weather
-[demo](https://kapernikxd.github.io/weather/ "Ссылка на проект")
+## Ссылка на проект:
+[DEMO](https://kapernikxd.github.io/weather/ "Ссылка на проект")
 
 ## Project setup
 ```
