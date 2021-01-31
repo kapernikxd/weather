@@ -48,7 +48,7 @@
         cols="6">
         <v-list-item class="widget__list-item">
           <v-list-item-icon class="widget__item-icon">
-            <v-icon>mdi-cloud-download</v-icon>
+            <v-icon>cloud</v-icon>
           </v-list-item-icon>
           <v-list-item-subtitle style="margin-left:10px">{{weatherAPI.clouds.all}}%</v-list-item-subtitle>
         </v-list-item>
