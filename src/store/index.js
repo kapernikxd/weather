@@ -6,9 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     url: 'http://api.openweathermap.org/data/2.5/weather',
-    cities: [
-      // { name: "Казань", index: 0 },
-    ],
+    cities: [],
   },
   mutations: {
     ADD_CITY (state, payload) {

@@ -13,6 +13,7 @@
     "degrees-to-direction": "^1.1.1",
     "geoip-lite": "^1.4.2",
     "lodash": "^4.17.20",
+    "material-design-icons": "^3.0.1",
     "vue": "^2.6.11",
     "vue-confirm-dialog": "^1.0.2",
     "vue-router": "^3.2.0",

@@ -1,17 +1,77 @@
 <template>
   <div>
-    <div v-if="loadedData">
-      <p>{{weatherAPI != null ? weatherAPI.name : ''}}, {{weatherAPI != '' ? weatherAPI.sys.country : ''}}</p>
-      <img alt="weather" :src="image">
-      <p>{{convertKtoC(weatherAPI.main.temp)}}</p> 
-      <div>Feels like {{convertKtoC(weatherAPI.main.feels_like)}}℃. {{weatherAPI.weather[0].description}}</div>
-      <div style="display:flex; justify-content: center"><div :style="style">&#8657;</div>{{weatherAPI.wind.speed}}m/s {{windDirection(weatherAPI.wind.deg)}}  {{weatherAPI.main.pressure}}</div>
-      <p>Humidity: {{weatherAPI.main.humidity}}% Dew point: 0℃</p>
-      <p>Cloudiness: {{weatherAPI.clouds.all}}%</p>  
-    </div>
-    <div v-else style="text-align:center">
-      Загрузка...
-    </div>
+    <v-list-item two-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline" style="font-size: 25px;">
+          {{weatherAPI != null ? weatherAPI.name : ''}}, {{weatherAPI != '' ? weatherAPI.sys.country : ''}}
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+
+    <v-card-text>
+      <v-row align="center">
+        <v-col
+          class="display-3"
+          cols="7"
+          style="font-size:60px; line-height: 1.7em; padding-left:10px"
+        >
+          {{convertKtoC(weatherAPI.main.temp)}}&deg;C
+        </v-col>
+        <v-col 
+          cols="5"
+          class="justify-end flex">
+          <v-img
+            :src="image"
+            alt="weather"
+            style="width:90%;" 
+          ></v-img>
+        </v-col>
+      </v-row>
+    </v-card-text>
+    
+    <v-list-item>
+      <v-list-item-subtitle>Feels like {{convertKtoC(weatherAPI.main.feels_like)}}&deg;C. {{toUpperCaseLetter(weatherAPI.weather[0].description)}}</v-list-item-subtitle>
+    </v-list-item>
+    
+    
+    <v-row class="ma-0 pa-0 widget__row">
+      <v-col 
+        cols="6">
+        <v-list-item class="widget__list-item">
+          <v-list-item-icon class="widget__item-icon">
+            <v-icon :style="style">mdi-send</v-icon>
+          </v-list-item-icon>
+          <v-list-item-subtitle style="margin-left:10px">{{weatherAPI.wind.speed}} m/s {{windDirection(weatherAPI.wind.deg)}}</v-list-item-subtitle>
+        </v-list-item>
+      </v-col>
+      <v-col 
+        cols="6">
+        <v-list-item class="widget__list-item">
+          <v-list-item-icon class="widget__item-icon">
+            <v-icon>mdi-cloud-download</v-icon>
+          </v-list-item-icon>
+          <v-list-item-subtitle style="margin-left:10px">{{weatherAPI.clouds.all}}%</v-list-item-subtitle>
+        </v-list-item>
+      </v-col>
+    </v-row>
+
+    <v-row class="ma-0 pa-0 widget__row">
+      <v-col 
+        cols="6">
+        <v-list-item class="widget__list-item">
+          <v-list-item-subtitle>Humidity: {{weatherAPI.main.humidity}}%</v-list-item-subtitle>
+        </v-list-item>
+      </v-col>
+      <v-col 
+        cols="6">
+        <v-list-item class="widget__list-item">
+          <v-list-item-subtitle>Pressure: {{weatherAPI.main.pressure}}hPA</v-list-item-subtitle>
+        </v-list-item>
+      </v-col>
+    </v-row>
+
+    <v-divider class="widget__divider"></v-divider>
+
   </div>
 </template>
 
@@ -80,6 +140,11 @@ export default {
           console.log(err)
         })
 
+      },
+
+
+      toUpperCaseLetter(string){
+        return string[0].toUpperCase() + string.slice(1);
       }
   },
 }
@@ -87,6 +152,22 @@ export default {
 
 
 
-<style lang="scss" scoped>
+<style lang="scss">
+.widget__row {
+  margin: 0px !important;
 
+  .widget__item-icon {
+    margin:0px !important;
+  }
+
+  .widget__list-item {
+    min-height: 25px !important;
+    padding:0 !important;
+  }
+}
+
+.widget__divider {
+  margin-top:30px !important;
+}
 </style>
+

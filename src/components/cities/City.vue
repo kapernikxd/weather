@@ -1,14 +1,28 @@
 <template>
-  <li class="d-flex align-items-center list-group-item">
-    <button
-      class="btn border-0 flex-grow-1 text-left shadow-none"
-    >
-      <span>{{ name }}</span>
-    </button>
-    <button @click="$emit('on-delete')" class="btn btn-outline-danger border-0">
-      <span class="fa fa-trash"></span>
-    </button>
-  </li>
+    <div class="widget__city">
+      <v-list-item>
+        <v-list-item-avatar>
+          <v-icon
+            class="grey lighten-1"
+            style="transform: rotate(45deg);"
+            small
+          >
+            zoom_out_map
+          </v-icon>
+        </v-list-item-avatar>
+
+        <v-list-item-content calss="ml-2">
+          <v-list-item-title v-text="name"></v-list-item-title>
+        </v-list-item-content>
+
+        <v-list-item-action>
+          <v-btn icon @click="$emit('on-delete')">
+            <v-icon color="grey lighten-1">mdi-delete</v-icon>
+          </v-btn>
+        </v-list-item-action>
+      </v-list-item>
+      <v-divider></v-divider>
+    </div>
 </template>
 
 <script>
@@ -29,5 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.widget__city{
+  
+}
 </style>

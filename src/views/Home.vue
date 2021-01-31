@@ -1,26 +1,44 @@
 <template>
-  <div class="home">
+  <div class="weather">
       <vue-confirm-dialog></vue-confirm-dialog>
-      <button @click="settings=!settings">Настройки</button>
-      <WidgetSet v-if="settings"/>
-      <div 
+      <v-icon
+        v-if="!settings"
+        @click="settings=!settings"
+        large
+        color="green darken-2"
+        class="weather__settings"
+      >
+        settings
+      </v-icon>
+      <v-icon
         v-else
-        v-for="(city, i) in cities" :key="i">
-        <WidgetData :city="city"/>
-      </div>
+        @click="settings=!settings"
+        large
+        color="green darken-2"
+        class="weather__settings"
+      >
+        close
+      </v-icon>
+      <WidgetSet v-if="settings"/>
 
-    <!-- <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-
+      <v-card
+        elevation="2"
+        v-else 
+      >
+        <WidgetData
+          :city="city"
+          v-for="(city, i) in cities" :key="i"
+        />
+      </v-card>
   </div>
 </template>
 
 <script>
 import WidgetData from '@/components/WidgetData'
 import WidgetSet from '@/components/WidgetSet'
+
 import _ from 'lodash'
 import axios from 'axios'
-
 
 
 export default {
@@ -54,9 +72,9 @@ export default {
 
   mounted () {
     this.checkLocalStorage()
-    // this.getIP()
   },
   methods: {
+
     showConfirm() {
       this.$confirm({
         title: 'Confirm',
@@ -106,7 +124,6 @@ export default {
       })
     },
 
-
     checkLocalStorage(){
       let data = JSON.parse(localStorage.getItem('cities'))
       if(!_.isEmpty(data)){
@@ -119,7 +136,6 @@ export default {
       
     }
     
-
   },
 }
 </script>
@@ -127,5 +143,18 @@ export default {
 
 
 <style lang="scss" scoped>
+.weather{
+  max-width: 320px;
+  width: 100%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 
+  .weather__settings{
+    position: absolute;
+    z-index: 100;
+    right: 10px;
+    top: 10px;
+  }
+}
 </style>

@@ -1,12 +1,17 @@
 <template>
-  <form class="col-12 col-sm-10 col-md-8 cl-lg-6" @submit.prevent="addCity()">
-    <input
-      v-model="newCity"
-      type="text"
-      class="form-control"
-      placeholder="Input city"
-    />
-  </form>
+  <v-text-field
+    placeholder="Input city"
+    v-model="newCity"
+    style="padding: 0 20px 0 25px; margin-top:15px"
+  >
+    <v-icon
+      slot="append"
+      color="red"
+      @click="addCity"
+    >
+      mdi-plus
+    </v-icon>
+  </v-text-field>
 </template>
 
 <script>
@@ -27,4 +32,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" >
+  @import '@/assets/_variables.scss'
+</style>
